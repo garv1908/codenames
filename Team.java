@@ -20,4 +20,13 @@ public class Team implements Scorable {
     public void updateScore(int score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "Team: " + teamName + " Score: " + score;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
 }
