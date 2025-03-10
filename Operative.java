@@ -11,7 +11,7 @@ public class Operative extends Player {
         String guess = scanner.nextLine();
         while (!guess.matches("\\d+ \\d+"))
         {
-            System.out.print("Invalid input. Enter your guess (format: row col): ");
+            System.out.print("Invalid input. Enter your guess (example: 2 4): ");
             guess = scanner.nextLine();
         }
         System.out.println("You guessed: " + guess);

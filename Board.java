@@ -88,22 +88,23 @@ public class Board {
             }
         }
     }
-
-    @Override
-    public String toString()
-    {
-        String res = "";
-        for (int i = 0; i < size; i++)
+        @Override
+        public String toString()
         {
-            for (int j = 0; j < size; j++)
+            String res = "";
+            for (int i = 0; i < size; i++)
             {
-                if (board[i][j].length() < 8) res += board[i][j] + "\t\t";
-                else res += board[i][j] + "\t";
+                for (int j = 0; j < size; j++)
+                {
+                    String word;
+                    word = board[i][j] + "\t".repeat(board[i][j].length() < 8 ? 2 : 1) + " | " + revealedState[i][j];
+                    word += "\t".repeat(word.length() < 16 ? 3 : 2);
+                    res += word;
+                }
+                res += "\n";
             }
-            res += "\n";
+            return res;
         }
-        return res;
-    }
 
     public String printSecretState()
     {
