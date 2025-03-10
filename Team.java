@@ -10,4 +10,14 @@ public class Team implements Scorable {
         this.teamName = teamName;
         this.score = 0;
     }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
+
+    @Override
+    public void updateScore(int score) {
+        this.score = score;
+    }
 }
