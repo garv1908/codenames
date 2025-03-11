@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.io.IOException;
 
 public class Board {
-    int size;
+    private int size;
     private String[][] board;
     private String[][] secretState;
     private String[][] revealedState;
@@ -28,8 +28,17 @@ public class Board {
         }
         this.size = size;
 
-        // choose a random 25 words from the word list (given that the boardsize is 5) 
-        // assign 8 to red, 8 to blue, 7 to neutral, 1 to assassin
+        initializeBoard();
+    }
+    public Board()
+    {
+        board = new String[5][5];
+        revealedState = new String[5][5];
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+            revealedState[i][j] = "x";
+            }
+        }
         initializeBoard();
     }
 
@@ -225,4 +234,34 @@ public class Board {
         return redCount == 8 || blueCount == 8;
     }
     
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (!(obj instanceof Board))
+        {
+            return false;
+        }
+        Board board1 = (Board) obj;
+        if (size != board1.size)
+        {
+            return false;
+        }
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                if (!board[i][j].equals(board1.board[i][j]) || 
+                    !secretState[i][j].equals(board1.secretState[i][j]) || 
+                    !revealedState[i][j].equals(board1.revealedState[i][j]))
+                    {
+                    return false;
+                }
+            }
+        }
+        return startingTeam.equals(board1.startingTeam);
+    }
 }

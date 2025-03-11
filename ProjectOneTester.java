@@ -1,6 +1,38 @@
 import java.util.Scanner;
 
 public class ProjectOneTester {
+
+/**
+ * This project is a digital version of the popular board game "Codenames"
+ * designed to accommodate larger groups of players and provide
+ * customizable word choices for more engaging gameplay.
+ * The traditional physical version of Codenames can be limiting in
+ * terms of the number of players and the visibility of the board state,
+ * especially in larger groups.
+ * 
+ * I had this problem when playing with friends, where the visibility of the board
+ * state was an issue when playing in person. This digital version aims to solve these problems!
+ * 
+ * This digital implementation aims to solve these issues by
+ * providing a clear and accessible interface for all players, regardless
+ * of group size, and allowing for a customizable set of words to enhance
+ * the fun and replayability of the game.
+ *
+ * The program consists of several classes:
+ * Board, Team, Player, Spymaster, Operative, Game, and ProjectOneTester.
+ * 
+ * The Board class represents the game board and manages the initialization
+ * and state of the board.
+ * The Team class represents a team with a name and score.
+ * The Player class is an abstract base class for different types of players.
+ * The Spymaster class extends Player and handles clue-giving
+ * Operative class extends Player and handles guessing.
+ * The Game class contains the main game logic and flow management.
+ * The ProjectOneTester class contains the main method to start and run the game,
+ *      initializing teams, spymasters, operatives, and the board, and managing the game flow.
+ *
+ */
+
     /**
      * The main method to start and run the Codenames game.
      * Initializes the teams, spymasters, operatives, and the board.
