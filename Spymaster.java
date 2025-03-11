@@ -16,7 +16,7 @@ public class Spymaster extends Player {
      * @param scanner The Scanner object to read input from the console.
      */
     public void giveClue(Scanner scanner) {
-        System.out.print("Enter your clue: ");
+        System.out.print("Enter your clue (example: metal 2): ");
         String clue = scanner.nextLine();
         while (!clue.matches("\\w+ \\d+")) {
             System.out.print("Invalid input. Enter your clue (example: metal 2): ");

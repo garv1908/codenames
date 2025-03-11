@@ -24,16 +24,28 @@ public class Operative extends Player {
      */
     public boolean guess(Board board, Scanner scanner, Team enemyTeam)
     {
-        System.out.print("Enter your guess (format: row col): ");
+        System.out.print("\nEnter your guess (format: row col) ranges 1-5: ");
         String guess = scanner.nextLine();
-        while (!guess.matches("\\d+ \\d+"))
-        {
-            System.out.print("Invalid input. Enter your guess (example: 2 4): ");
+
+        int row = 0, col;
+
+        while (true) {
+            if (guess.matches("\\d+ \\d+"))
+            {
+                row = Integer.parseInt(guess.split(" ")[0]) - 1;
+                col = Integer.parseInt(guess.split(" ")[1]) - 1;
+                if (row >= 0 && row < 5 && col >= 0 && col < 5)
+                {
+                    break;
+                }
+            }
+            System.out.print("Invalid input. Enter your guess (example: 1 5): ");
             guess = scanner.nextLine();
         }
+
         System.out.println("You guessed: " + guess);
-        int row = Integer.parseInt(guess.split(" ")[0]) + 1;
-        int col = Integer.parseInt(guess.split(" ")[1]) + 1;
+        System.out.println("\n");
+
         return board.makeGuess(row, col, getTeam(), enemyTeam);
     }
 }

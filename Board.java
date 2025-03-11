@@ -111,7 +111,7 @@ public class Board {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 String word = String.format("%-15s | %s", board[i][j], revealedState[i][j]);
-                res.append(word).append(revealedState[i][j] == "neutral" ? "\t" : "\t\t");
+                res.append(word).append((revealedState[i][j] == "neutral" || revealedState[i][j] == "assassin") ? "\t" : "\t\t");
             }
             res.append("\n");
         }
