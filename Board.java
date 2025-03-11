@@ -12,6 +12,11 @@ public class Board {
     private String[][] revealedState;
     private String startingTeam;
 
+    /**
+     * Constructor to initialize the board with the given size.
+     * It sets up the revealed state and initializes the board with words.
+     * @param size the size of the board
+     */
     public Board(int size)
     {
         board = new String[size][size];
@@ -28,6 +33,10 @@ public class Board {
         initializeBoard();
     }
 
+    /**
+     * Initializes the board with words from the word list.
+     * It shuffles the words and assigns them to the board.
+     */
     private void initializeBoard()
     {
         List<String> words = new ArrayList<>();
@@ -50,6 +59,10 @@ public class Board {
         setSecretState();
     }
 
+    /**
+     * Sets the secret state of the board with colors.
+     * It assigns colors to the words and determines the starting team.
+     */
     private void setSecretState()
     {
         secretState = new String[size][size];
@@ -88,6 +101,10 @@ public class Board {
         }
     }
 
+    /**
+     * Returns a string representation of the board with revealed states.
+     * @return the string representation of the board
+     */
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -101,6 +118,10 @@ public class Board {
         return res.toString();
     }
 
+    /**
+     * Prints the secret state of the board.
+     * @return the string representation of the secret state
+     */
     public String printSecretState()
     {
         String res = "";
@@ -116,6 +137,14 @@ public class Board {
         return res;
     }
 
+    /**
+     * Makes a guess on the board and updates the game state.
+     * @param row the row of the guessed word
+     * @param col the column of the guessed word
+     * @param currentTeam the team making the guess
+     * @param enemyTeam the opposing team
+     * @return true if the turn is over, false otherwise
+     */
     public boolean makeGuess(int row, int col, Team currentTeam, Team enemyTeam)
     {
         boolean isTurnOver = true;
@@ -154,16 +183,28 @@ public class Board {
         return isTurnOver;
     }
 
+    /**
+     * Returns the current state of the board.
+     * @return the board
+     */
     public String[][] getBoard()
     {
         return board;
     }
 
+    /**
+     * Returns the starting team of the game.
+     * @return the starting team
+     */
     public String getStartingTeam()
     {
         return startingTeam;
     }
 
+    /**
+     * Checks if the game is over.
+     * @return true if the game is over, false otherwise
+     */
     public boolean isGameOver()
     {
         int redCount = 0;

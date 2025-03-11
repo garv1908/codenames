@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class Game
 {
+    /**
+     * Pauses the execution for a given number of seconds.
+     * This method is used to create delays in the game flow.
+     *
+     * @param seconds the number of seconds to sleep
+     */
     public static void sleep(int seconds)
     {
         try {
@@ -11,11 +17,26 @@ public class Game
         }
     }
 
+    /**
+     * Prints the current score of both teams.
+     * This method is used to display the score after each turn.
+     *
+     * @param red the red team
+     * @param blue the blue team
+     */
     public static void printScore(Team red, Team blue)
     {
         System.out.println(red.toString());
         System.out.println(blue.toString());
     }
+
+    /**
+     * The main method to start and run the Codenames game.
+     * Initializes the teams, spymasters, operatives, and the board.
+     * Manages the game flow and handles the main game loop.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args)
     {
         Team red = new Team("red");
