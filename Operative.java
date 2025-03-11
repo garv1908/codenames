@@ -5,7 +5,7 @@ public class Operative extends Player {
         super(team);
     }
     
-    public void guess(Board board, Scanner scanner)
+    public boolean guess(Board board, Scanner scanner, Team enemyTeam)
     {
         System.out.print("Enter your guess (format: row col): ");
         String guess = scanner.nextLine();
@@ -15,12 +15,8 @@ public class Operative extends Player {
             guess = scanner.nextLine();
         }
         System.out.println("You guessed: " + guess);
-        board.makeGuess(Integer.parseInt(guess.split(" ")[0]), Integer.parseInt(guess.split(" ")[1]), getTeam().getTeamName());
+        int row = Integer.parseInt(guess.split(" ")[0]) + 1;
+        int col = Integer.parseInt(guess.split(" ")[1]) + 1;
+        return board.makeGuess(row, col, getTeam(), enemyTeam);
     }
-     
-    public void endTurn()
-    {
-        System.out.println("I'm ending my turn");
-    }
-
 }

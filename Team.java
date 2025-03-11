@@ -26,6 +26,15 @@ public class Team implements Scorable {
         return "Team: " + teamName + " Score: " + score;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        
+        if (!(obj instanceof Team)) return false;
+        Team team = (Team) obj;
+        return teamName.equals(team.teamName);
+    }
+
     public String getTeamName() {
         return teamName;
     }

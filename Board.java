@@ -82,29 +82,24 @@ public class Board {
         {
             for (int j = 0; j < size; j++)
             {
-                System.out.println(i + " " + j + " " + k);
                 secretState[i][j] = colors.get(k);
                 k++;
             }
         }
     }
-        @Override
-        public String toString()
-        {
-            String res = "";
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    String word;
-                    word = board[i][j] + "\t".repeat(board[i][j].length() < 8 ? 2 : 1) + " | " + revealedState[i][j];
-                    word += "\t".repeat(word.length() < 16 ? 3 : 2);
-                    res += word;
-                }
-                res += "\n";
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                String word = String.format("%-15s | %s", board[i][j], revealedState[i][j]);
+                res.append(word).append(revealedState[i][j] == "neutral" ? "\t" : "\t\t");
             }
-            return res;
+            res.append("\n");
         }
+        return res.toString();
+    }
 
     public String printSecretState()
     {
@@ -121,25 +116,42 @@ public class Board {
         return res;
     }
 
-    public void makeGuess(int row, int col, String team)
+    public boolean makeGuess(int row, int col, Team currentTeam, Team enemyTeam)
     {
+        boolean isTurnOver = true;
         System.out.println("You guessed: " + board[row][col]);
         if (secretState[row][col].equals("red"))
         {
-            if (team.equals("red")) System.out.println("Correct! Red team gets a point!");
-            else System.out.println("Incorrect! Blue team gets a point!");
-        } else if (secretState[row][col].equals("blue"))
-        {
-            if (team.equals("blue")) System.out.println("Correct! Blue team gets a point!");
-            else System.out.println("Incorrect! Red team gets a point!");
-        } else if (secretState[row][col].equals("neutral"))
-        {
+            if (currentTeam.getTeamName() == "red")
+            {
+                System.out.println("Correct! Red team gets a point!");
+                currentTeam.incrementScore();
+                isTurnOver = false;
+            } else {
+                System.out.println("Incorrect! Blue team gets a point!");
+                enemyTeam.incrementScore();
+                isTurnOver = true;
+            }
+        } else if (secretState[row][col].equals("blue")) {
+            if (currentTeam.getTeamName() == "blue")
+            {
+                System.out.println("Correct! Blue team gets a point!");
+                currentTeam.incrementScore();
+                isTurnOver = false;
+            } else {
+                System.out.println("Incorrect! Red team gets a point!");
+                enemyTeam.incrementScore();
+                isTurnOver = true;
+            }
+        } else if (secretState[row][col].equals("neutral")) {
             System.out.println("You hit a neutral word! Your turn is over!");
-        } else if (secretState[row][col].equals("assassin"))
-        {
+            isTurnOver = true;
+        } else if (secretState[row][col].equals("assassin")) {
             System.out.println("You hit the assassin! Game over!");
+            isTurnOver = true;
         }
         revealedState[row][col] = secretState[row][col];
+        return isTurnOver;
     }
 
     public String[][] getBoard()
@@ -156,6 +168,10 @@ public class Board {
     {
         int redCount = 0;
         int blueCount = 0;
+
+        if (startingTeam == "red") redCount++;
+        else blueCount++;
+
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)

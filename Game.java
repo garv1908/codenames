@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Game
 {
-
     public static void sleep(int seconds)
     {
         try {
@@ -10,6 +9,12 @@ public class Game
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void printScore(Team red, Team blue)
+    {
+        System.out.println(red.toString());
+        System.out.println(blue.toString());
     }
     public static void main(String[] args)
     {
@@ -65,11 +70,13 @@ public class Game
         // main game loop
         while (true)
         {
+            boolean isTurnOver;
+            System.out.println("\n\n");
             if (currentTeam == "red")
             {
                 System.out.println("Red team's turn!");
                 redSpymaster.giveClue(scanner);
-                redOperative.guess(board, scanner);
+                isTurnOver = redOperative.guess(board, scanner, blue);
                 System.out.println("Here is the board:\n");
                 System.out.println(board.toString());
                 if (board.isGameOver())
@@ -77,11 +84,11 @@ public class Game
                     System.out.println("Game over!");
                     break;
                 }
-                currentTeam = "blue";
+                if (isTurnOver) currentTeam = "blue";
             } else {
                 System.out.println("Blue team's turn!");
                 blueSpymaster.giveClue(scanner);
-                blueOperative.guess(board, scanner);
+                isTurnOver = blueOperative.guess(board, scanner, red);
                 System.out.println("Here is the board:\n");
                 System.out.println(board.toString());
                 if (board.isGameOver())
@@ -89,8 +96,9 @@ public class Game
                     System.out.println("Game over!");
                     break;
                 }
-                currentTeam = "red";
+                if (isTurnOver) currentTeam = "red";
             }
+            printScore(red, blue);
         }
     }
 }
