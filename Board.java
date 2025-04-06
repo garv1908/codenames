@@ -264,4 +264,22 @@ public class Board {
         }
         return startingTeam.equals(board1.startingTeam);
     }
+
+    public String getWord(int row, int col)
+    {
+        return board[row][col];
+    }
+    public String getRevealedWordState(int row, int col)
+    {
+        return revealedState[row][col];
+    }
+    public void setRevealedWordState(int row, int col, String state)
+    {
+        revealedState[row][col] = state;
+    }
+    public String getSecretWordState(int row, int col)
+    {
+        return secretState[row][col];
+    }
+
 }
